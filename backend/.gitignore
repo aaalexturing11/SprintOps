@@ -2,6 +2,8 @@ HELP.md
 application-local.properties
 target/
 uploads/
+# Variables locales OCI (generado por oci/setup.sh)
+oci/local-env.sh
 # Manifiestos generados por oci/deploy.sh
 sprintops-backend-*.yaml
 .mvn/wrapper/maven-wrapper.jar

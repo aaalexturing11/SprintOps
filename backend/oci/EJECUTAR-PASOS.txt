@@ -19,25 +19,28 @@ Sin Secrets de Kubernetes: variables en el Deployment vía envsubst (solo lab).
    - User → Auth Tokens → crear token → guardarlo.
    echo 'TU_AUTH_TOKEN' > at.cfg
    docker login -u '<namespace>/<usuario-oracle>' <region>.ocir.io --password-stdin < at.cfg
-   export DOCKER_REGISTRY='<region>.ocir.io/<namespace>/<repo-ocir>'   # sin https
 
-4) Variables para el manifiesto (sustituye valores reales; pegar en Cloud Shell antes de deploy)
-   export DOCKER_REGISTRY='...'
-   export SPRING_DATASOURCE_URL='jdbc:oracle:thin:@...'   # cadena JDBC de tu ATP (consola OCI)
-   export SPRING_DATASOURCE_USERNAME='ADMIN'             # o usuario de app
+3b) Variables (equivalente a “source setup.sh” del PDF de práctica)
+   cd backend
+   source oci/setup.sh
+   # Pregunta por JDBC de ATP, Groq, Telegram, etc. y escribe oci/local-env.sh (gitignore).
+   # build.sh y deploy.sh cargan local-env.sh solo si existe.
+   # Alternativa: export manual (mismo contenido que antes) sin usar setup.sh.
+
+4) (Opcional) Si no usaste setup.sh, exporta a mano antes de build/deploy:
+   export DOCKER_REGISTRY='<region>.ocir.io/<namespace>/<repo-ocir>'
+   export SPRING_DATASOURCE_URL='jdbc:oracle:thin:@...'
+   export SPRING_DATASOURCE_USERNAME='ADMIN'
    export SPRING_DATASOURCE_PASSWORD='...'
-   export OCI_REGION='iad'                                # o tu región (opcional)
+   export OCI_REGION='iad'
    export GROQ_API_KEY='gsk_...'
    export APP_TELEGRAM_BOT_TOKEN='123456:ABC...'
-   export APP_TELEGRAM_BOT_USERNAME='tu_bot'              # sin @
-   export APP_FRONTEND_BASE_URL='https://tu-frontend'     # ver nota abajo
+   export APP_TELEGRAM_BOT_USERNAME='tu_bot'
+   export APP_FRONTEND_BASE_URL='https://tu-frontend'
 
    Dónde sale cada dato:
    - SPRING_DATASOURCE_* : consola OCI → tu Autonomous Database → DB Connection
-     (copia "Connection string" / TNS o JDBC; suele incluir usuario distinto de ADMIN si creaste uno).
-   - APP_FRONTEND_BASE_URL : URL pública donde sirvas el React (Object Storage estático,
-     otro LB, o temporalmente http://IP:5173 si solo es demo). Sirve para enlaces en emails;
-     si no usas correo, puedes poner la misma base que uses en el navegador.
+   - APP_FRONTEND_BASE_URL : URL pública del React (Object Storage, LB, o demo http://IP:5173)
 
 5) Construir imagen y subir a OCIR
    cd backend

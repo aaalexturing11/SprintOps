@@ -5,6 +5,11 @@ SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 BACKEND="$(cd "$SCRIPT_DIR/.." && pwd)"
 cd "$BACKEND"
 
+if [ -f "$SCRIPT_DIR/local-env.sh" ]; then
+  # shellcheck source=/dev/null
+  source "$SCRIPT_DIR/local-env.sh"
+fi
+
 if [ -z "${DOCKER_REGISTRY:-}" ] && command -v state_get >/dev/null 2>&1; then
   export DOCKER_REGISTRY="$(state_get DOCKER_REGISTRY)"
 fi

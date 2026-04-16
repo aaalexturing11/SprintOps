@@ -5,6 +5,11 @@ SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 BACKEND="$(cd "$SCRIPT_DIR/.." && pwd)"
 cd "$BACKEND"
 
+if [ -f "$SCRIPT_DIR/local-env.sh" ]; then
+  # shellcheck source=/dev/null
+  source "$SCRIPT_DIR/local-env.sh"
+fi
+
 export IMAGE_NAME="${IMAGE_NAME:-sprintops-backend}"
 export IMAGE_VERSION="${IMAGE_VERSION:-0.1}"
 
