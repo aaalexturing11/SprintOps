@@ -1,0 +1,38 @@
+{
+  "users": [
+    {
+      "id": "u1",
+      "name": "Axel De Gyves",
+      "username": "axel",
+      "email": "axel@example.com",
+      "role": "developer",
+      "avatar": "",
+      "active": true
+    },
+    {
+      "id": "u2",
+      "name": "Scrum Master",
+      "username": "sm",
+      "email": "sm@example.com",
+      "role": "scrumMaster",
+      "avatar": "",
+      "active": true
+    },
+    {
+      "id": "u3",
+      "name": "Product Owner",
+      "username": "po",
+      "email": "po@example.com",
+      "role": "productOwner",
+      "avatar": "",
+      "active": true
+    }
+  ],
+  "projects": [],
+  "projectMembers": [],
+  "sprints": [],
+  "issues": [],
+  "standups": [],
+  "reflections": [],
+  "notifications": []
+}
